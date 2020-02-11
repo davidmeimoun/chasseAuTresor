@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using log4net;
 
 namespace Library
@@ -96,7 +97,7 @@ namespace Library
             int width = int.Parse(instructions[1]);
             int height = int.Parse(instructions[2]);
             int numberOfTreasure = int.Parse(instructions[3]);
-            return new Treasure(height, width, numberOfTreasure);
+            return new Treasure(width, height, numberOfTreasure);
         }
 
 
@@ -121,7 +122,6 @@ namespace Library
             string orientation = instructions[4];
             string moves = instructions[5];
             Adventurer adventurer = new Adventurer(name, orientation, moves, width, height);
-            this.adventurer = adventurer;
             return adventurer;
         }
 
@@ -133,12 +133,45 @@ namespace Library
 
         public void RunOneMove()
         {
-            adventurer.RunOneMove(map.TravelerMap);
+            if (adventurer != null)
+            {
+                adventurer.RunOneMove(map.TravelerMap);
+            }
         }
 
         public void RunAllMove()
         {
-            adventurer.RunAllMoves(map.TravelerMap);
+            if (adventurer != null)
+            {
+                adventurer.RunAllMoves(map.TravelerMap);
+            }
+
+        }
+
+        public string PrintResult()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{map.getLetter()} - {map.Width} - {map.Height} \n");
+            foreach (var item in map.TravelerMap)
+            {
+                if (item is Treasure)
+                {
+                    Treasure treasure = (Treasure)item;
+                    sb.Append($"{treasure.getLetter()} - {treasure.Width} - {treasure.Height} - {treasure.NumberOfTreasure}\n");
+                }
+                if (item is Montain)
+                {
+                    Montain montain = (Montain)item;
+                    sb.Append($"{montain.getLetter()} - {montain.Width} - {montain.Height} \n");
+                }
+                if (item is Adventurer)
+                {
+                    Adventurer adventurer = (Adventurer)item;
+                    sb.Append($"{adventurer.getLetter()} - {adventurer.Name} - {adventurer.Width} - {adventurer.Height} - {adventurer.Orientation} - {adventurer.NumberOfTreasureCollected} \n");
+                }
+            }
+
+            return sb.ToString();
         }
 
 
@@ -152,7 +185,7 @@ namespace Library
         public void AddMapInTheGame(Map map)
         {
             log.Info($"create  map with width : {map.Width} ; height : {map.Height}");
-           this.map = map;
+            this.map = map;
 
         }
 
@@ -166,12 +199,13 @@ namespace Library
             return new Map(width, height);
         }
 
-       
+
 
         public void AddAdventurerInTheMap(Adventurer adventurer)
         {
             log.Info($"Add Adveznturer in the map with name : {adventurer.Name} ; width : {adventurer.Width} ; height : {adventurer.Height} ; orientation : {adventurer.Orientation} ; moves : {adventurer.Moves}");
             map.TravelerMap[adventurer.Height, adventurer.Width] = adventurer;
+            this.adventurer = adventurer;
         }
 
         private bool IfAdventurer(string line)

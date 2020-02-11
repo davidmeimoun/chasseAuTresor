@@ -129,9 +129,8 @@ namespace CarbonIT_challenge
                     }
                     else
                     {
-                        string errorMessage = "No moves for continue";
-                        log.Debug($"{errorMessage}");
-                        MessageBox.Show($"{errorMessage}", "Important Message");
+                        string result = map.PrintResult();
+                        MessageBox.Show($"{result}", "Result");
                     }
                 }
                 else

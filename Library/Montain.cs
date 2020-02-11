@@ -18,7 +18,10 @@ namespace Library
             this.height = height;
         }
 
-        public string Letter { get => letter; set => letter = value; }
+        public string Letter
+        {
+            get => letter; set => letter = value;
+        }
         public int Width
         {
             get => width;

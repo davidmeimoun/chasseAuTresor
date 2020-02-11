@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    public  abstract class ElementsOfMap
+    public abstract class ElementsOfMap
     {
         public abstract string getLetter();
 

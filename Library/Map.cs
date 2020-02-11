@@ -16,7 +16,7 @@ namespace Library
         {
             this.width = width;
             this.height = height;
-            this.elementsOfMap = new ElementsOfMap[height,width];
+            this.elementsOfMap = new ElementsOfMap[height, width];
             FillElementOfMapEmptyElement(this.elementsOfMap);
         }
 
