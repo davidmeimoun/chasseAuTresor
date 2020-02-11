@@ -157,6 +157,7 @@ namespace Library
                 if (item is Treasure)
                 {
                     Treasure treasure = (Treasure)item;
+                    sb.Append("# {T comme Trésor} - {Axe horizontal} - {Axe vertical} - {Nb. de trésors} \n");
                     sb.Append($"{treasure.getLetter()} - {treasure.Width} - {treasure.Height} - {treasure.NumberOfTreasure}\n");
                 }
                 if (item is Montain)
@@ -166,6 +167,7 @@ namespace Library
                 }
                 if (item is Adventurer)
                 {
+                    sb.Append("# {A comme Aventurier} - {Nom de l’aventurier} - {Axe horizontal} - {Axe vertical} - {Orientation} - {Nb. trésors ramassés}\n");
                     Adventurer adventurer = (Adventurer)item;
                     sb.Append($"{adventurer.getLetter()} - {adventurer.Name} - {adventurer.Width} - {adventurer.Height} - {adventurer.Orientation} - {adventurer.NumberOfTreasureCollected} \n");
                 }
